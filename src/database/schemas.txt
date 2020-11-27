@@ -1,0 +1,19 @@
+ Reported content
+
+The behavior reported to the application are as follows:
+
+    Sleep duration and sleep quality
+    Time spent on sports and exercise
+    Time spent studying
+    Regularity and quality of eating
+    Generic mood
+
+Morning reporting form contains fields for date, sleep duration, sleep quality, and generic mood
+
+Evening reporting form contains fields for date, time spent on sports and exercise, 
+time spent studying, regularity and quality of eating, and generic mood
+
+Tables required:
+-morning report
+-evening report
+-users
