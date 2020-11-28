@@ -17,3 +17,33 @@ Tables required:
 -morning report
 -evening report
 -users
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(320) NOT NULL,
+  password CHAR(60) NOT NULL
+);
+
+CREATE TABLE morning_reports (
+  id SERIAL PRIMARY KEY,
+  date DATE NOT NULL,
+  sleep_duration FLOAT NOT NULL,
+  sleep_quality INTEGER NOT NULL,
+  generic_mood INTEGER NOT NULL,
+  user_id INTEGER REFERENCES users(id)
+);
+
+CREATE TABLE evening_reports (
+  id SERIAL PRIMARY KEY,
+  date DATE NOT NULL,
+  sports_duration FLOAT NOT NULL,
+  studying_duration FLOAT NOT NULL,
+  eating_regularity INTEGER NOT NULL,
+  eating_quality INTEGER NOT NULL,
+  generic_mood INTEGER NOT NULL,
+  user_id INTEGER REFERENCES users(id)
+);
+
+Name of user1: test
+Password of user1: 000000000000000000000000000000000000000000000000000000000000
+
