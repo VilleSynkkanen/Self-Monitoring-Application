@@ -1,6 +1,9 @@
--weekly summaries
--monthly summaries
+-summaries
+	-any week
+	-handling no data
+-prevent reporting multiple times
 -registration & authentication
+	-...
 
 
 
