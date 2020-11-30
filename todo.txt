@@ -1,2 +1,6 @@
--start according to instructions
-	-file structure etc.
+-weekly summaries
+-monthly summaries
+-registration & authentication
+
+
+

@@ -1,0 +1,34 @@
+<h1>Evening reporting</h1>
+
+<form method="POST" action='/behavior/reporting/evening'>
+<table>
+    <tr>
+      <td>Date</td>
+      <td><input type="date" name="date" /></td>
+    </tr>
+    <tr>
+      <td>Sports duration (0-24)</td>
+      <td><input type="number" name="sports_duration" min="0" max="24" step="0.1" /></td>
+    </tr>
+    <tr>
+      <td>Studying duration (0-24)</td>
+      <td><input type="number" name="studying_duration" min="0" max="24" step="0.1" /></td>
+    </tr>
+    <tr>
+      <td>Eating regularity (1-5)</td>
+      <td><input type="number" name="eating_regularity" min="1" max="5" /></td>
+    </tr>
+    <tr>
+      <td>Eating quality (1-5)</td>
+      <td><input type="number" name="eating_quality" min="1" max="5" /></td>
+    </tr>
+    <tr>
+      <td>Generic mood (1-5)</td>
+      <td><input type="number" name="generic_mood" min="1" max="5" /></td>
+    </tr>
+    <tr>
+      <td>Submit report</td>
+      <td><input type="submit" value="Submit" /></td>
+    </tr>
+</table>
+</form>
