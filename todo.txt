@@ -1,5 +1,5 @@
 -summaries
-	-any week
+	-any month
 	-handling no data
 -prevent reporting multiple times
 -registration & authentication

@@ -1,9 +1,10 @@
 import { executeQuery } from "../database/database.js";
 
-const getWeeklyAverages = async(timePeriod) => {
+// Gets averages from timePeriod - 1 week/month
+const getAverages = async(timePeriod, timeStamp) => {
   
-  let morning = await executeQuery(`SELECT AVG(sleep_duration) AS sleep_duration, AVG(sleep_quality) AS sleep_quality, AVG(generic_mood) AS generic_mood, COUNT(*) AS count FROM morning_reports WHERE user_id = 1 AND (date >= date_trunc('${timePeriod}', CURRENT_TIMESTAMP - interval '1 ${timePeriod}') and date < date_trunc('${timePeriod}', CURRENT_TIMESTAMP));`);
-  let evening = await executeQuery(`SELECT AVG(sports_duration) AS sports_duration, AVG(studying_duration) AS studying_duration, AVG(eating_regularity) AS eating_regularity, AVG(eating_quality) AS eating_quality, AVG(generic_mood) AS generic_mood, COUNT(*) AS count FROM evening_reports WHERE user_id = 1 AND (date >= date_trunc('${timePeriod}', CURRENT_TIMESTAMP - interval '1 ${timePeriod}') and date < date_trunc('${timePeriod}', CURRENT_TIMESTAMP));`);
+  let morning = await executeQuery(`SELECT AVG(sleep_duration) AS sleep_duration, AVG(sleep_quality) AS sleep_quality, AVG(generic_mood) AS generic_mood, COUNT(*) AS count FROM morning_reports WHERE user_id = 1 AND (date >= date_trunc('${timePeriod}', ${timeStamp} - interval '1 ${timePeriod}') and date < date_trunc('${timePeriod}', ${timeStamp}));`);
+  let evening = await executeQuery(`SELECT AVG(sports_duration) AS sports_duration, AVG(studying_duration) AS studying_duration, AVG(eating_regularity) AS eating_regularity, AVG(eating_quality) AS eating_quality, AVG(generic_mood) AS generic_mood, COUNT(*) AS count FROM evening_reports WHERE user_id = 1 AND (date >= date_trunc('${timePeriod}', ${timeStamp} - interval '1 ${timePeriod}') and date < date_trunc('${timePeriod}', ${timeStamp}));`);
   const data = { sleep_duration: false, sports_duration: false, studying_duration: false, sleep_quality: false, generic_mood: false, mood_count: 0 };
   if (morning && morning.rowCount > 0) {
     morning = morning.rowsOfObjects()[0];
@@ -32,4 +33,4 @@ const getWeeklyAverages = async(timePeriod) => {
   return data;
 }
 
-export { getWeeklyAverages }
+export { getAverages }

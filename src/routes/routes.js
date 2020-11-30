@@ -12,5 +12,6 @@ router.get('/behavior/reporting/evening', reportEvening);
 router.post('/behavior/reporting/morning', reportApi.insertMorningReport);
 router.post('/behavior/reporting/evening', reportApi.insertEveningReport);
 router.get('/behavior/summary', summaryPage);
+router.post('/behavior/summary', summaryPage);
 
 export { router };
