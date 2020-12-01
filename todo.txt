@@ -1,7 +1,9 @@
+
 -summaries
-	-any month
+	-change summary handling function for easier queries (get specified week/month)
+	-any week/month
 	-handling no data
--prevent reporting multiple times
+-new report deletes old report
 -registration & authentication
 	-...
 

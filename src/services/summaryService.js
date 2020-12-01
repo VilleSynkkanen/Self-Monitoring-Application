@@ -1,6 +1,6 @@
 import { executeQuery } from "../database/database.js";
 
-// Gets averages from timePeriod - 1 week/month
+// Gets averages from previous week/month
 const getAverages = async(timePeriod, timeStamp) => {
   
   let morning = await executeQuery(`SELECT AVG(sleep_duration) AS sleep_duration, AVG(sleep_quality) AS sleep_quality, AVG(generic_mood) AS generic_mood, COUNT(*) AS count FROM morning_reports WHERE user_id = 1 AND (date >= date_trunc('${timePeriod}', ${timeStamp} - interval '1 ${timePeriod}') and date < date_trunc('${timePeriod}', ${timeStamp}));`);
