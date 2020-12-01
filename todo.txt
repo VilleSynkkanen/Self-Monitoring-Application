@@ -1,9 +1,10 @@
-
+-change to 2 database tables (both reports in same table)
 -summaries
 	-change summary handling function for easier queries (get specified week/month)
 	-any week/month
 	-handling no data
 -new report deletes old report
+-cleanup & checks
 -registration & authentication
 	-...
 
