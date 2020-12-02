@@ -1,0 +1,23 @@
+<%- include('./partials/header.ejs') %>
+<h1>Registration</h1>
+<form method="POST" action='/auth/registration'>
+<table>
+    <tr>
+      <td>Email</td>
+      <td><input type="email" name="email" /></td>
+    </tr>
+    <tr>
+      <td>Password</td>
+      <td><input type="password" name="password1" /></td>
+    </tr>
+    <tr>
+      <td>Retype password</td>
+      <td><input type="password" name="password2" /></td>
+    </tr>
+    <tr>
+      <td>Register</td>
+      <td><input type="submit" value="Submit" /></td>
+    </tr>
+</table>
+</form>
+<%- include('./partials/footer.ejs') %>

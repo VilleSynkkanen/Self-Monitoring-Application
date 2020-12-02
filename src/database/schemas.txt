@@ -18,8 +18,8 @@ Tables required:
 -users
 
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(320) NOT NULL,
+  id SERIAL PRIMARY KEY,          
+  username VARCHAR(320) NOT NULL,   // Username = email
   password CHAR(60) NOT NULL
 );
 

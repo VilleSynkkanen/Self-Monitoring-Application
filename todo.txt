@@ -1,12 +1,17 @@
--registration & authentication
--cleanup & checks
--prevent sql injection
--implement remaining APIs
--consult checklist
+-authentication
+	-authorization stuff
+-cleanup & checks (to)
+-prevent sql injection  (to)
+-implement remaining APIs (to)
+-consult checklist (pe)
 	
 -Apis: routes that are used for building APIs
 -Controllers: routes that are related to creating views
 -Services: controllers and APIs rely on services (abstracting away functionality)
+
+User2:
+-name: fakiiri@outlook.com
+-password: hello
 
 
 
