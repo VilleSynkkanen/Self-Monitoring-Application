@@ -1,4 +1,3 @@
--style library
 -registration & authentication
 -cleanup & checks
 -prevent sql injection
