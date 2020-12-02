@@ -1,4 +1,4 @@
-import { register, login } from "../../services/authenticationService.js";
+import { register, login, logout } from "../../services/authenticationService.js";
 
 const registrationPage = async({render}) => {
     render('registrationForm.ejs');
@@ -32,4 +32,9 @@ const loginConfirmation = async(context) => {
     }
 }
 
-export { registrationPage, registrationConfirmation, loginPage, loginConfirmation }
+const logoutPage = async(context) => {
+    context.render('logoutPage.ejs');
+    await logout(context);
+}
+
+export { registrationPage, registrationConfirmation, loginPage, loginConfirmation, logoutPage }

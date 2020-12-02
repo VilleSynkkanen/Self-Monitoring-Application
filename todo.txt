@@ -1,9 +1,8 @@
--authentication
-	-authorization stuff
--cleanup & checks (to)
--prevent sql injection  (to)
--implement remaining APIs (to)
--consult checklist (pe)
+-authentication: show user logged in
+-cleanup & checks
+-prevent sql injection
+-implement remaining APIs
+-consult checklist
 	
 -Apis: routes that are used for building APIs
 -Controllers: routes that are related to creating views
@@ -12,6 +11,10 @@
 User2:
 -name: fakiiri@outlook.com
 -password: hello
+
+Can leave out max 7 requirements for grade 5:
+-deployment (2)
+-tests(4)
 
 
 

@@ -8,6 +8,18 @@ const errorMiddleware = async(context, next) => {
   }
 }
 
+const authenticationMiddleware = async({request, response, session}, next) => {
+  if (request.url.pathname.startsWith('/behavior')) {
+    if (session && await session.get('authenticated')) {
+      await next();
+    } else {
+      response.status = 401;
+    }
+  } else {
+    await next();
+  }
+}
+
 const requestTimingMiddleware = async({ request }, next) => {
   const start = Date.now();
   await next();
@@ -28,4 +40,4 @@ const serveStaticFilesMiddleware = async(context, next) => {
   }
 }
 
-export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware };
+export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware, authenticationMiddleware };

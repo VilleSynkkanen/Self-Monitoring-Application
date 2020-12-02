@@ -1,19 +1,22 @@
 <%- include('./partials/header.ejs') %>
-<h1>Behavior reporting application</h1>
+<h1>Self-monitoring application</h1>
 <p>Insert description of application here</p>
 
+<% if(loggedIn)  { %> 
 <td><a href="/behavior/reporting/">Reporting page</a> </td>
 <td><a href="/behavior/summary/">Summary page</a> </td>
-<td><a href="/auth/registration">Registration page</a> </td>
-<td><a href="/auth/login">Login page</a> </td>
+<td><a href="/auth/logout">Log out</a> </td>
+<p>Average mood today: <%= report.today %></p>
+<p>Average mood yesterday: <%= report.yesterday %></p>
 
-<p>Average mood today: <%= today %></p>
-<p>Average mood yesterday: <%= yesterday %></p>
-
-<% if(today > yesterday) { %> 
+<% if(report.today > report.yesterday) { %> 
     <p>Things are looking bright today. :)</p>
 <% } %>
-<% if(today < yesterday) { %> 
+<% if(report.today < report.yesterday) { %> 
     <p>Things are looking gloomy today. :(</p>
+<% } } else {%>
+    <p>Not logged in. :(</p>
+    <td><a href="/auth/registration">Registration page</a> </td>
+    <td><a href="/auth/login">Login page</a> </td>
 <% } %>
 <%- include('./partials/footer.ejs') %>

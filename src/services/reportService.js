@@ -1,23 +1,26 @@
 import { executeQuery } from "../database/database.js";
 
-const getMorningReports = async() => {
-  const res = await executeQuery("SELECT * FROM reports WHERE user_id = 1 AND type = 'morning';");
+const getMorningReports = async({session}) => {
+  const id = (await session.get('user')).id;
+  const res = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND type = 'morning';", id);
   if (res && res.rowCount > 0) {
     return res.rowsOfObjects();
   }
   return [];
 }
 
-const getEveningReports = async() => {
-  const res = await executeQuery("SELECT * FROM reports WHERE user_id = 1 AND type = 'evening';");
+const getEveningReports = async({session}) => {
+  const id = (await session.get('user')).id;
+  const res = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND type = 'evening';", id);
   if (res && res.rowCount > 0) {
     return res.rowsOfObjects();
   }
   return [];
 }
 
-const getDoneInfo = async(dateFromToday) => {
-  const result = await executeQuery(`SELECT type FROM reports WHERE user_id = 1 AND date = CURRENT_DATE + ${dateFromToday};`);
+const getDoneInfo = async(dateFromToday, session) => {
+  const id = (await session.get('user')).id;
+  const result = await executeQuery(`SELECT type FROM reports WHERE user_id = $1 AND date = CURRENT_DATE + ${dateFromToday};`, id);
   let done = { morning: "not done", evening: "not done" };
   
   if (result && result.rowCount > 0) {
@@ -33,8 +36,9 @@ const getDoneInfo = async(dateFromToday) => {
   return { morning: done.morning, evening: done.evening };
 }
 
-const getMoodForDay = async(dateFromToday) => {
-  const result = await executeQuery(`SELECT AVG(generic_mood) AS generic_mood FROM reports WHERE user_id = 1 AND date = CURRENT_DATE + ${dateFromToday};`);
+const getMoodForDay = async(dateFromToday, session) => {
+  const id = (await session.get('user')).id;
+  const result = await executeQuery(`SELECT AVG(generic_mood) AS generic_mood FROM reports WHERE user_id = $1 AND date = CURRENT_DATE + ${dateFromToday};`, id);
   let avg = 0;
   if (result && result.rowCount > 0) {
     avg = result.rowsOfObjects()[0].generic_mood;
@@ -43,16 +47,16 @@ const getMoodForDay = async(dateFromToday) => {
   return {average: avg};
 }
 
-const getMoodTrend = async() => {
-  const today = await getMoodForDay(0);
+const getMoodTrend = async(session) => {
+  const today = await getMoodForDay(0, session);
   const avgToday = today.average;
-  const yesterday = await getMoodForDay(-1);
+  const yesterday = await getMoodForDay(-1, session);
   const avgYesterday = yesterday.average;
   return { today: avgToday, yesterday: avgYesterday};
 }
 
 const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_mood, user_id) => {
-  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = 1 AND date = $1 AND type = 'morning';", date);
+  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'morning';", user_id, date);
   if(existingReport && existingReport.rowCount > 0)
   {
     // Found existing report
@@ -69,7 +73,7 @@ const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_m
 }
 
 const insertEveningReport = async(date, sports_duration, studying_duration, eating_regularity, eating_quality, generic_mood, user_id) => {
-  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = 1 AND date = $1 AND type = 'evening';", date);
+  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'evening';", user_id, date);
   if(existingReport && existingReport.rowCount > 0)
   {
     // Found existing report

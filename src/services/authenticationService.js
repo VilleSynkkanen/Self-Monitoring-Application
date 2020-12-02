@@ -62,4 +62,9 @@ const login = async({request, session}) => {
     return true;
 }
 
-export { register, login }
+const logout = async({session}) => {
+    await session.set('authenticated', false);
+    await session.set('user', {});
+}
+
+export { register, login, logout }

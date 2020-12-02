@@ -1,12 +1,21 @@
 import { getMorningReports, getEveningReports, getMoodTrend, getMoodForDay, getDoneInfo } from "../../services/reportService.js";
 
-const rootLandingPage = async({render}) => {
-  const data = await getMoodTrend();
+const rootLandingPage = async({render, session}) => {
+  let data;
+  if(session && await session.get('authenticated'))
+  {
+    data = { report: await getMoodTrend(session), loggedIn: true };
+  }
+  else
+  {
+    data = { report: [], loggedIn: false };
+  }
+  
   render('rootLanding.ejs', data);
 };
 
-const reportLandingPage = async({render}) => {
-  const data = await getDoneInfo(0);;
+const reportLandingPage = async({render, session}) => {
+  const data = await getDoneInfo(0, session);;
   render('reportLanding.ejs', data);
 };
 
