@@ -1,4 +1,4 @@
-import { getMorningReports, getEveningReports, getMoodTrend, getMoodForDay } from "../../services/reportService.js";
+import { getMorningReports, getEveningReports, getMoodTrend, getMoodForDay, getDoneInfo } from "../../services/reportService.js";
 
 const rootLandingPage = async({render}) => {
   const data = await getMoodTrend();
@@ -6,7 +6,7 @@ const rootLandingPage = async({render}) => {
 };
 
 const reportLandingPage = async({render}) => {
-  const data = await getMoodForDay(0);;
+  const data = await getDoneInfo(0);;
   render('reportLanding.ejs', data);
 };
 

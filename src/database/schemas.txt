@@ -14,8 +14,7 @@ Evening reporting form contains fields for date, time spent on sports and exerci
 time spent studying, regularity and quality of eating, and generic mood
 
 Tables required:
--morning report
--evening report
+-reports
 -users
 
 CREATE TABLE users (
@@ -24,23 +23,17 @@ CREATE TABLE users (
   password CHAR(60) NOT NULL
 );
 
-CREATE TABLE morning_reports (
+CREATE TABLE reports (
   id SERIAL PRIMARY KEY,
   date DATE NOT NULL,
-  sleep_duration FLOAT NOT NULL,
-  sleep_quality INTEGER NOT NULL,
+  type TEXT CHECK (type IN ('morning', 'evening')),
   generic_mood INTEGER NOT NULL,
-  user_id INTEGER REFERENCES users(id)
-);
-
-CREATE TABLE evening_reports (
-  id SERIAL PRIMARY KEY,
-  date DATE NOT NULL,
-  sports_duration FLOAT NOT NULL,
-  studying_duration FLOAT NOT NULL,
-  eating_regularity INTEGER NOT NULL,
-  eating_quality INTEGER NOT NULL,
-  generic_mood INTEGER NOT NULL,
+  sleep_duration FLOAT,
+  sleep_quality INTEGER,
+  sports_duration FLOAT,
+  studying_duration FLOAT,
+  eating_regularity INTEGER,
+  eating_quality INTEGER,
   user_id INTEGER REFERENCES users(id)
 );
 

@@ -19,40 +19,48 @@
 
 <h1>Weekly summary</h1>
 
-<table>
-    <tr>
-      <td>Average sleep duration: <%= weekly.sleep_duration %> hours/day</td>
-    </tr>
-    <tr>
-      <td>Average sleep quality: <%= weekly.sleep_quality %>/5</td>
-    </tr>
-    <tr>
-        <td>Average generic mood: <%= weekly.generic_mood %>/5</td>
-    </tr>
-    <tr>
-        <td>Average exercise time: <%= weekly.sports_duration %> hours/day</td>
-    </tr>
-    <tr>
-        <td>Average studying time: <%= weekly.studying_duration %> hours/day</td>
-    </tr>
-</table>
+<% if(weekly.sleep_duration > 0 && weekly.sleep_quality > 0 && weekly.generic_mood > 0 && weekly.sports_duration > 0 && weekly.studying_duration > 0) { %> 
+    <table>
+        <tr>
+        <td>Average sleep duration: <%= weekly.sleep_duration %> hours/day</td>
+        </tr>
+        <tr>
+        <td>Average sleep quality: <%= weekly.sleep_quality %>/5</td>
+        </tr>
+        <tr>
+            <td>Average generic mood: <%= weekly.generic_mood %>/5</td>
+        </tr>
+        <tr>
+            <td>Average exercise time: <%= weekly.sports_duration %> hours/day</td>
+        </tr>
+        <tr>
+            <td>Average studying time: <%= weekly.studying_duration %> hours/day</td>
+        </tr>
+    </table>
+<% } else { %> 
+    <p> No data available</p>
+<% } %> 
 
 <h1>Monthly summary</h1>
 
-<table>
-    <tr>
-      <td>Average sleep duration: <%= monthly.sleep_duration %> hours/day</td>
-    </tr>
-    <tr>
-      <td>Average sleep quality: <%= monthly.sleep_quality %>/5</td>
-    </tr>
-    <tr>
-        <td>Average generic mood: <%= monthly.generic_mood %>/5</td>
-    </tr>
-    <tr>
-        <td>Average exercise time: <%= monthly.sports_duration %> hours/day</td>
-    </tr>
-    <tr>
-        <td>Average studying time: <%= monthly.studying_duration %> hours/day</td>
-    </tr>
-</table>
+<% if(monthly.sleep_duration > 0 && monthly.sleep_quality > 0 && monthly.generic_mood > 0 && monthly.sports_duration > 0 && monthly.studying_duration > 0) { %> 
+    <table>
+        <tr>
+        <td>Average sleep duration: <%= monthly.sleep_duration %> hours/day</td>
+        </tr>
+        <tr>
+        <td>Average sleep quality: <%= monthly.sleep_quality %>/5</td>
+        </tr>
+        <tr>
+            <td>Average generic mood: <%= monthly.generic_mood %>/5</td>
+        </tr>
+        <tr>
+            <td>Average exercise time: <%= monthly.sports_duration %> hours/day</td>
+        </tr>
+        <tr>
+            <td>Average studying time: <%= monthly.studying_duration %> hours/day</td>
+        </tr>
+    </table>
+<% } else { %> 
+    <p> No data available</p>
+<% } %> 
