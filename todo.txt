@@ -1,7 +1,4 @@
--authentication: show user logged in
--cleanup & checks
--prevent sql injection
--implement remaining APIs
+-implement APIs
 -consult checklist
 	
 -Apis: routes that are used for building APIs
