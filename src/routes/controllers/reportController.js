@@ -1,4 +1,4 @@
-import { getMorningReports, getEveningReports, getMoodTrend, getMoodForDay, getDoneInfo } from "../../services/reportService.js";
+import { getMoodTrend, getDoneInfo } from "../../services/reportService.js";
 
 const rootLandingPage = async({render, session}) => {
   let data;

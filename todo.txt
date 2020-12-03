@@ -1,6 +1,5 @@
--implement APIs
 -consult checklist
-	
+
 -Apis: routes that are used for building APIs
 -Controllers: routes that are related to creating views
 -Services: controllers and APIs rely on services (abstracting away functionality)
@@ -10,8 +9,9 @@ User2:
 -password: hello
 
 Can leave out max 7 requirements for grade 5:
--deployment (2)
+-deployment (2 + 2 from documentation)
 -tests(4)
+=> make at least some tests, leave out deployment
 
 
 

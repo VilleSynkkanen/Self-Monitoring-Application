@@ -1,13 +1,5 @@
 import * as reportService from "../../services/reportService.js";
 
-const getMorningReports = async({response}) => {
-    response.body = { message: await reportService.getMorningReports() };
-};
-
-const getEveningReports = async({response}) => {
-    response.body = { message: await reportService.getEveningReports() };
-};
-
 const insertMorningReport = async({request, response, session}) => {
     const body = request.body();
     const params = await body.value;
@@ -38,4 +30,4 @@ const insertEveningReport = async({request, response, session}) => {
 };
 
    
-export { getMorningReports, getEveningReports, insertMorningReport, insertEveningReport };
+export { insertMorningReport, insertEveningReport };

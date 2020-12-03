@@ -1,23 +1,5 @@
 import { executeQuery } from "../database/database.js";
 
-const getMorningReports = async({session}) => {
-  const id = (await session.get('user')).id;
-  const res = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND type = 'morning';", id);
-  if (res && res.rowCount > 0) {
-    return res.rowsOfObjects();
-  }
-  return [];
-}
-
-const getEveningReports = async({session}) => {
-  const id = (await session.get('user')).id;
-  const res = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND type = 'evening';", id);
-  if (res && res.rowCount > 0) {
-    return res.rowsOfObjects();
-  }
-  return [];
-}
-
 const getDoneInfo = async(dateFromToday, session) => {
   const id = (await session.get('user')).id;
   const result = await executeQuery(`SELECT type FROM reports WHERE user_id = $1 AND date = CURRENT_DATE + ${dateFromToday};`, id);
@@ -89,4 +71,4 @@ const insertEveningReport = async(date, sports_duration, studying_duration, eati
   }
 }
 
-export { getMorningReports, getEveningReports, getMoodTrend, getMoodForDay, insertMorningReport, insertEveningReport, getDoneInfo };
+export { getMoodTrend, getMoodForDay, insertMorningReport, insertEveningReport, getDoneInfo };
