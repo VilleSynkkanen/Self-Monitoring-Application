@@ -1,4 +1,11 @@
 <%- include('./partials/header.ejs') %>
-<p>Logged out</p>
+<form method="POST" action='/auth/logout'>
+    <table>
+        <tr>
+          <td>Logout button</td>
+          <td><input type="submit" value="Logout" /></td>
+        </tr>
+    </table>
+</form>
 <td><a href="/">Front page</a></td>
 <%- include('./partials/footer.ejs') %>

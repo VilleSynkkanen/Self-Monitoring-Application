@@ -3,7 +3,8 @@ import { getDefaultAverages, getAveragesFromWeek, getAveragesFromMonth } from ".
 const summaryPage = async({render, request, session}) => {
   const body = request.body();
   const params = await body.value;
-  let data = { weekly: false, monthly: false};
+
+  let data = { weekly: false, monthly: false, def: true};
   if(params)
   {
     const week = params.get('week');
@@ -13,6 +14,7 @@ const summaryPage = async({render, request, session}) => {
     data.weekly = await getAveragesFromWeek(wk[1].substring(1), wk[0], session);
     const mth = month.split("-");
     data.monthly = await getAveragesFromMonth(mth[1], mth[0], session);
+    data.def = false;
   }
   else
   {

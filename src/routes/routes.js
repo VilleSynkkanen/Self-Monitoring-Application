@@ -1,7 +1,7 @@
 import { Router, oakCors } from "../deps.js";
 import { rootLandingPage, reportLandingPage, reportEvening, reportMorning } from "./controllers/reportController.js"
 import { summaryPage } from "./controllers/summaryController.js"
-import { registrationPage, registrationConfirmation, loginPage, loginConfirmation, logoutPage } from "./controllers/authenticationController.js"
+import { registrationPage, registrationConfirmation, loginPage, loginConfirmation, logoutPage, logout } from "./controllers/authenticationController.js"
 import * as reportApi from "./apis/reportApi.js";
 import * as summaryApi from "./apis/summaryApi.js";
 
@@ -20,6 +20,7 @@ router.post('/auth/registration', registrationConfirmation);
 router.get('/auth/login', loginPage);
 router.post('/auth/login', loginConfirmation);
 router.get('/auth/logout', logoutPage);
+router.post('/auth/logout', logout);
 router.get('/api/summary', oakCors(), summaryApi.getLastWeekReports);
 router.get('/api/summary/:year/:month/:day', oakCors(), summaryApi.getDayReports);
 

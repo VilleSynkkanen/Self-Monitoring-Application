@@ -1,22 +1,19 @@
--fix bcrypt dependency import
+SMALL STUFF:
+-prevent sql injection
+-application description on landing page
+-logged in message at the top of the page
+-remove database credentials from code
+
 -separate test/production configs
 -registration form validation, error messages
--login: show error message when credentials are invalid
--logout: button at /auth/logout
 -middlewares:
 	-logging middleware
 	-improve auth middleware (check reqs)
 -reporting:
 	-date populated by default (today)
 	-validation, errors
--summary: indicate that default/other statistics are shown
--application description on landing page
 -testing
--prevent sql injection
--database connection pool
--remove database credentials from code
 -use partials for validation errors
--logged in message at the top of the page
 -documentation
 -usability improvements
 -code cleanup

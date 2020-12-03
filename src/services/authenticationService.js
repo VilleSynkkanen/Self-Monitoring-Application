@@ -1,7 +1,5 @@
-//import bcrypt from "../deps.js";  //Does not work yet
+import { bcrypt } from "../deps.js"; 
 import { executeQuery } from "../database/database.js";
-
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 
 const register = async({request, session}) => {
     const body = request.body();
