@@ -17,7 +17,7 @@ const registrationConfirmation = async(context) => {
 };
 
 const loginPage = async({render}) => {
-    render('loginForm.ejs', { invalid: false});
+    render('loginForm.ejs', { invalid: false });
 }
 
 const loginConfirmation = async(context) => {
@@ -28,12 +28,12 @@ const loginConfirmation = async(context) => {
     }
     else
     {
-        context.render('loginForm.ejs', { invalid: true});
+        context.render('loginForm.ejs', { invalid: true });
     }
 }
 
 const logoutPage = async(context) => {
-    context.render('logoutPage.ejs');
+    context.render('logoutPage.ejs', { email: (await context.session.get('user')).email });
 }
 
 const logoutRedirect = async(context) => {

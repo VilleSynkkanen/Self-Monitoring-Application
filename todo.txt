@@ -1,6 +1,5 @@
 FIRST (pe):
 -application description on landing page
--logged in message at the top of the page
 
 NEXT (la, su):
 -registration form validation, error messages

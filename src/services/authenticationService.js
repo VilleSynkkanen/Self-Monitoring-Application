@@ -50,11 +50,10 @@ const login = async({request, session}) => {
     if (!correct) {
         return false;
     }
-
     await session.set('authenticated', true);
     await session.set('user', {
         id: user.id,
-        email: user.email
+        email: email
     });
 
     return true;

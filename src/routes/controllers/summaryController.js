@@ -4,7 +4,7 @@ const summaryPage = async({render, request, session}) => {
   const body = request.body();
   const params = await body.value;
 
-  let data = { weekly: false, monthly: false, def: true};
+  let data = { weekly: false, monthly: false, def: true, email: (await session.get('user')).email };
   if(params)
   {
     const week = params.get('week');
