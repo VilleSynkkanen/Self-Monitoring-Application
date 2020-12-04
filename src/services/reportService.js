@@ -1,8 +1,8 @@
 import { executeQuery } from "../database/database.js";
 
-const getDoneInfo = async(dateFromToday, session) => {
+const getDoneInfo = async(session) => {
   const id = (await session.get('user')).id;
-  const result = await executeQuery(`SELECT type FROM reports WHERE user_id = $1 AND date = CURRENT_DATE + ${dateFromToday};`, id);
+  const result = await executeQuery('SELECT type FROM reports WHERE user_id = $1 AND date = CURRENT_DATE;', id);
   let done = { morning: "not done", evening: "not done" };
   
   if (result && result.rowCount > 0) {
@@ -20,7 +20,19 @@ const getDoneInfo = async(dateFromToday, session) => {
 
 const getMoodForDay = async(dateFromToday, session) => {
   const id = (await session.get('user')).id;
-  const result = await executeQuery(`SELECT AVG(generic_mood) AS generic_mood FROM reports WHERE user_id = $1 AND date = CURRENT_DATE + ${dateFromToday};`, id);
+  let result;
+  if(dateFromToday === 0)
+  {
+    result = await executeQuery('SELECT AVG(generic_mood) AS generic_mood FROM reports WHERE user_id = $1 AND date = CURRENT_DATE;', id);
+  }
+  else if(dateFromToday === -1)
+  {
+    result = await executeQuery('SELECT AVG(generic_mood) AS generic_mood FROM reports WHERE user_id = $1 AND date = CURRENT_DATE - 1;', id);
+  }
+  else
+  {
+    return {average: 0}
+  }
   let avg = 0;
   if (result && result.rowCount > 0) {
     avg = result.rowsOfObjects()[0].generic_mood;
@@ -51,7 +63,6 @@ const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_m
     await executeQuery("INSERT INTO reports (date, sleep_duration, sleep_quality, generic_mood, user_id, type) VALUES ($1, $2, $3, $4, $5, 'morning');", 
       date, sleep_duration, sleep_quality, generic_mood, user_id);
   }
-  
 }
 
 const insertEveningReport = async(date, sports_duration, studying_duration, eating_regularity, eating_quality, generic_mood, user_id) => {

@@ -18,8 +18,8 @@ const summaryPage = async({render, request, session}) => {
   }
   else
   {
-    data.weekly = await getDefaultAverages("week", "CURRENT_TIMESTAMP", session);
-    data.monthly = await getDefaultAverages("month", "CURRENT_TIMESTAMP", session);
+    data.weekly = await getDefaultAverages("week", session);
+    data.monthly = await getDefaultAverages("month", session);
   }
 
   render('summaryPage.ejs', data);

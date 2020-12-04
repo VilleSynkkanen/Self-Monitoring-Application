@@ -1,10 +1,8 @@
 FIRST (pe):
--prevent sql injection
 -application description on landing page
 -logged in message at the top of the page
--remove database credentials from code
 
-SECOND (la, su):
+NEXT (la, su):
 -registration form validation, error messages
 -middlewares:
 	-logging middleware
@@ -14,9 +12,10 @@ SECOND (la, su):
 	-validation, errors
 -use partials for validation errors
 
-THIRD (final week):
+FINAL (final week):
 -testing
 -separate test/production configs
+-remove database credentials from code
 -documentation
 -usability improvements
 -code cleanup
@@ -32,7 +31,7 @@ User2:
 Can leave out max 7 requirements for grade 5:
 -deployment (2 + 2 from documentation)
 -tests(4)
-=> make at least some tests, leave out deployment
+=> leave out deployment
 
 
 

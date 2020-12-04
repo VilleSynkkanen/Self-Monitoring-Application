@@ -15,7 +15,7 @@ const rootLandingPage = async({render, session}) => {
 };
 
 const reportLandingPage = async({render, session}) => {
-  const data = await getDoneInfo(0, session);;
+  const data = await getDoneInfo(session);
   render('reportLanding.ejs', data);
 };
 
