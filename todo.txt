@@ -1,10 +1,10 @@
-SMALL STUFF:
+FIRST (pe):
 -prevent sql injection
 -application description on landing page
 -logged in message at the top of the page
 -remove database credentials from code
 
--separate test/production configs
+SECOND (la, su):
 -registration form validation, error messages
 -middlewares:
 	-logging middleware
@@ -12,8 +12,11 @@ SMALL STUFF:
 -reporting:
 	-date populated by default (today)
 	-validation, errors
--testing
 -use partials for validation errors
+
+THIRD (final week):
+-testing
+-separate test/production configs
 -documentation
 -usability improvements
 -code cleanup
