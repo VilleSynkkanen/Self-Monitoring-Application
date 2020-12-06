@@ -1,4 +1,12 @@
 import { executeQuery } from "../database/database.js";
+import { validate, required, minNumber, isInt, numberBetween } from "../deps.js"
+
+const morningReportValidationRules = {
+  date: [required],
+  sleep_duration: [required, minNumber(0)],
+  sleep_quality : [isInt, numberBetween(1, 5)],
+  generic_mood : [required, isInt, numberBetween(1, 5)]
+};
 
 const getDoneInfo = async(session) => {
   const id = (await session.get('user')).id;
