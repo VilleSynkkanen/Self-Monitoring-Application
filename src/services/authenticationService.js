@@ -1,33 +1,48 @@
-import { bcrypt } from "../deps.js"; 
+import { bcrypt, validate, required, isEmail, minLength, match } from "../deps.js"; 
 import { executeQuery } from "../database/database.js";
 
-const register = async({request, session}) => {
+const registrationValidationRules = {
+    email: [required, isEmail],
+    password: [required, minLength(4)],
+};
+
+const register = async({request}) => {
     const body = request.body();
     const params = await body.value;
     
-    const email = params.get('email');
-    const password1 = params.get('password1');
-    const password2 = params.get('password2');
+    const data = {
+        email: params.get('email'),
+        password: params.get('password1'),
+        password2: params.get('password2')
+    };
 
-    if (password1 !== password2) 
+    if(data.password !== data.password2)
     {
-        return false;
+        return {passed: false, errors: { password: { match: "passwords do not match" } }, email: data.email};
+    }
+
+    const [passes, errors] = await validate(data, registrationValidationRules);
+    
+    if (!passes) 
+    {
+        console.log(errors);
+        return {passed: false, errors: errors, email: data.email};
     } 
     else {
         // check if there already exists such an email in the database
         // -- if yes, respond with a message telling that the user
         // already exists
-        const result = await executeQuery("SELECT * FROM users WHERE username = $1;", email);
+        const result = await executeQuery("SELECT * FROM users WHERE username = $1;", data.email);
         if(result && result.rowCount > 0)
         {
-            return false;
+            return {passed: false, errors: { email: { isInUse: "email is already in use" } }, email: ""};
         }
         // otherwise, store the details in the database
-        const hash = await bcrypt.hash(password1);
+        const hash = await bcrypt.hash(data.password1);
         // when storing a password, store the hash
-        await executeQuery("INSERT INTO users (username, password) VALUES ($1, $2);", email, hash);
+        await executeQuery("INSERT INTO users (username, password) VALUES ($1, $2);", data.email, hash);
 
-        return true;
+        return {passed: true, errors: [], email: ""};
     }
 };
 

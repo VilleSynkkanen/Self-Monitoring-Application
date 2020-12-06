@@ -1,18 +1,16 @@
-NEXT (la, su):
--registration form validation, error messages
+NEXT (su):
 -middlewares:
 	-logging middleware
 	-improve auth middleware (check reqs)
 -reporting:
 	-date populated by default (today)
 	-validation, error messages
--use partials for validation errors
--usability improvements
 
 FINAL (final week):
 -testing
 -separate test/production configs
 -remove database credentials from code
+-usability improvements
 -documentation
 -code cleanup
 

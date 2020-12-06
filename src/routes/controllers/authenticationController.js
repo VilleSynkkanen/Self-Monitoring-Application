@@ -1,18 +1,18 @@
 import { register, login, logout } from "../../services/authenticationService.js";
 
 const registrationPage = async({render}) => {
-    render('registrationForm.ejs');
+    render('registrationForm.ejs', {passed: true, errors: [], email: ""});
 };
 
 const registrationConfirmation = async(context) => {
     const success = await register(context);
-    if(success)
+    if(success.passed)
     {
         context.render('registrationSuccessfulPage.ejs');
     }
     else
     {
-        context.response.redirect('/auth/registration');
+        context.render('registrationForm.ejs', success);
     }
 };
 
