@@ -1,13 +1,14 @@
-FEATURES (su-ti):
+FEATURES (ti):
 -reporting:
 	-validation, error messages
 -landing page:
 	-high-level summaries (from api)
 -usability improvements
--check requirements
+-check requirements, add missing stuff
 
 FINAL (ke-pe):
--testing (20 tests)
+-automated testing (20 tests)
+-manual testing
 -documentation
 
 -Apis: routes that are used for building APIs
