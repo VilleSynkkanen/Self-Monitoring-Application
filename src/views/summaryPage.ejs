@@ -18,7 +18,7 @@
     </table>
 </form>
 
-<h1>Weekly summary <% if(def) { %>(last week)<% } %></h1>
+<h1>Weekly summary <% if(def) { %>(last week)<% } else {%>(<%= week %>)<% } %> </h1>
 
 <% if(weekly.sleep_duration > 0 || weekly.sleep_quality > 0 || weekly.generic_mood > 0 || weekly.sports_duration > 0 || weekly.studying_duration > 0) { %> 
     <table>
@@ -42,7 +42,7 @@
     <p> No data available</p>
 <% } %> 
 
-<h1>Monthly summary <% if(def) { %>(last week)<% } %></h1>
+<h1>Monthly summary <% if(def) { %>(last month)<% } else {%>(<%= month %>)<% } %> </h1>
 
 <% if(monthly.sleep_duration > 0 || monthly.sleep_quality > 0 || monthly.generic_mood > 0 || monthly.sports_duration > 0 || monthly.studying_duration > 0) { %> 
     <table>

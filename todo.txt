@@ -1,17 +1,17 @@
-NEXT (su):
+FEATURES (su):
 -middlewares:
 	-logging middleware
 	-improve auth middleware (check reqs)
 -reporting:
 	-validation, error messages
+-landing page:
+	-high-level summaries
+-usability improvements
 
 FINAL (final week):
--testing
--separate test/production configs
--remove database credentials from code
--usability improvements
+-testing (20 tests)
 -documentation
--code cleanup
+-check requirements
 
 -Apis: routes that are used for building APIs
 -Controllers: routes that are related to creating views
@@ -21,10 +21,10 @@ User2:
 -name: fakiiri@outlook.com
 -password: hello
 
-Can leave out max 7 requirements for grade 5:
--deployment (2 + 2 from documentation)
--tests(4)
-=> leave out deployment
+Can leave out max 6 requirements for grade 5:
+-deployment (1 + 1 from docs)
+-configs (1)
+-database creds in code (1)
 
 Notes for docs:
 -generic mood is required (cannot be "no mood")

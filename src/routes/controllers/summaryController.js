@@ -11,9 +11,26 @@ const summaryPage = async({render, request, session}) => {
     const month = params.get('month');
     
     const wk = week.split("-");
-    data.weekly = await getAveragesFromWeek(wk[1].substring(1), wk[0], session);
+    if(wk.length > 1)
+    {
+      data.weekly = await getAveragesFromWeek(wk[1].substring(1), wk[0], session);
+      data.week = week;
+    }
+    else
+    {
+      data.week = "empty";
+    }
+      
     const mth = month.split("-");
-    data.monthly = await getAveragesFromMonth(mth[1], mth[0], session);
+    if(mth.length > 1)
+    {
+      data.monthly = await getAveragesFromMonth(mth[1], mth[0], session);
+      data.month = month;
+    }
+    else
+    {
+      data.month = "empty";
+    }
     data.def = false;
   }
   else
