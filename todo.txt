@@ -1,17 +1,16 @@
-FEATURES (su):
+FEATURES (ma, ti):
 -middlewares:
 	-logging middleware
-	-improve auth middleware (check reqs)
 -reporting:
 	-validation, error messages
 -landing page:
-	-high-level summaries
+	-high-level summaries (from api)
 -usability improvements
+-check requirements
 
-FINAL (final week):
+FINAL (ke-pe):
 -testing (20 tests)
 -documentation
--check requirements
 
 -Apis: routes that are used for building APIs
 -Controllers: routes that are related to creating views

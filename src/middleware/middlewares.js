@@ -13,7 +13,7 @@ const authenticationMiddleware = async({request, response, session}, next) => {
     if (session && await session.get('authenticated')) {
       await next();
     } else {
-      response.status = 401;
+      response.redirect("/auth/login");
     }
   } else {
     await next();
