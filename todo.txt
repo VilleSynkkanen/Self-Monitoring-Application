@@ -1,6 +1,4 @@
-FEATURES (ma, ti):
--middlewares:
-	-logging middleware
+FEATURES (su-ti):
 -reporting:
 	-validation, error messages
 -landing page:
