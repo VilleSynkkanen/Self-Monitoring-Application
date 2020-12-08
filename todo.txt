@@ -1,12 +1,5 @@
-FEATURES (ti):
--reporting:
-	-validation, error messages in evening report
--landing page:
-	-high-level summaries (from api)
--usability improvements
--check requirements, add missing stuff
-
 FINAL (ke-pe):
+-landing page: high-level summaries (from api)
 -automated testing (20 tests)
 -manual testing
 -documentation

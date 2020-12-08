@@ -10,9 +10,11 @@ const morningReportValidationRules = {
 
 const eveningReportValidationRules = {
   date: [required],
-  sleep_duration: [required, minNumber(0)],
-  sleep_quality : [isInt, numberBetween(1, 5)],
-  generic_mood : [required, isInt, numberBetween(1, 5)]
+  sports_duration: [required, minNumber(0)],
+  studying_duration: [required, minNumber(0)],
+  eating_regularity: [isInt, numberBetween(1, 5)],
+  eating_quality: [isInt, numberBetween(1, 5)],
+  generic_mood: [required, isInt, numberBetween(1, 5)]
 };
 
 const getDoneInfo = async(session) => {
@@ -77,8 +79,6 @@ const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_m
     generic_mood: Number(generic_mood)
   };
 
-  console.log(data);
-
   const [passes, errors] = await validate(data, morningReportValidationRules);
 
   if (passes) 
@@ -101,25 +101,53 @@ const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_m
   } 
   else 
   {
-    console.log(errors);
     return { passed: false, formData: data, errors: errors };
   }
 }
 
 const insertEveningReport = async(date, sports_duration, studying_duration, eating_regularity, eating_quality, generic_mood, user_id) => {
-  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'evening';", user_id, date);
-  if(existingReport && existingReport.rowCount > 0)
+  // Number turns "" into 0, so we have to check for that first
+  if(sports_duration !== "")
   {
-    // Found existing report
-    const existing = existingReport.rowsOfObjects()[0];
-    await executeQuery("UPDATE reports SET sports_duration = $2, studying_duration = $3, eating_regularity = $4, eating_quality = $5, generic_mood = $6 WHERE user_id = $7 AND date = $1 AND type = 'evening';", 
-      date, sports_duration, studying_duration, eating_regularity, eating_quality, generic_mood, user_id);
+    sports_duration = Number(sports_duration); 
+  }
+  if(studying_duration !== "")
+  {
+    studying_duration = Number(studying_duration);
+  }
+  const data = {
+    date: date,
+    sports_duration: sports_duration,
+    studying_duration: studying_duration,
+    eating_regularity: Number(eating_regularity),
+    eating_quality: Number(eating_quality),
+    generic_mood: Number(generic_mood)
+  };
+
+  const [passes, errors] = await validate(data, eveningReportValidationRules);
+
+  if(passes)
+  {
+    const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'evening';", user_id, date);
+    if(existingReport && existingReport.rowCount > 0)
+    {
+      // Found existing report
+      const existing = existingReport.rowsOfObjects()[0];
+      await executeQuery("UPDATE reports SET sports_duration = $2, studying_duration = $3, eating_regularity = $4, eating_quality = $5, generic_mood = $6 WHERE user_id = $7 AND date = $1 AND type = 'evening';", 
+        date, sports_duration, studying_duration, eating_regularity, eating_quality, generic_mood, user_id);
+    }
+    else
+    {
+      await executeQuery("INSERT INTO reports (date, sports_duration, studying_duration, eating_regularity,\
+        eating_quality, generic_mood, user_id, type) VALUES ($1, $2, $3, $4, $5, $6, $7, 'evening');", date, sports_duration, studying_duration, 
+          eating_regularity, eating_quality, generic_mood, user_id);
+    }
+
+    return { passed: true, formData: {}, errors: errors };
   }
   else
   {
-    await executeQuery("INSERT INTO reports (date, sports_duration, studying_duration, eating_regularity,\
-      eating_quality, generic_mood, user_id, type) VALUES ($1, $2, $3, $4, $5, $6, $7, 'evening');", date, sports_duration, studying_duration, 
-        eating_regularity, eating_quality, generic_mood, user_id);
+    return { passed: false, formData: data, errors: errors };
   }
 }
 

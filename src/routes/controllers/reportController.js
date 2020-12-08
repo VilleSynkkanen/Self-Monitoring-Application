@@ -33,8 +33,12 @@ const reportMorningFailed = async({render, session}, formData) => {
   render('morningForm.ejs', { email: (await session.get('user')).email, date: today(), passed: formData.passed, formData: formData.formData, errors: formData.errors});
 };
 
-const reportEvening = async({render, session}, formData = null) => {
-  render('eveningForm.ejs', { email: (await session.get('user')).email, date: today()});
+const reportEvening = async({render, session}) => {
+  render('eveningForm.ejs', { email: (await session.get('user')).email, date: today(), passed: true, formData: {}, errors: {}});
+};
+
+const reportEveningFailed = async({render, session}, formData) => {
+  render('eveningForm.ejs', { email: (await session.get('user')).email, date: today(), passed: formData.passed, formData: formData.formData, errors: formData.errors});
 };
  
-export { rootLandingPage, reportLandingPage, reportMorning, reportEvening, reportMorningFailed };
+export { rootLandingPage, reportLandingPage, reportMorning, reportEvening, reportMorningFailed, reportEveningFailed };

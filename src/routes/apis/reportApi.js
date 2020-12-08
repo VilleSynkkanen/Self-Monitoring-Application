@@ -22,20 +22,27 @@ const insertMorningReport = async(context) => {
     
 };
 
-const insertEveningReport = async({request, response, session}) => {
-    const body = request.body();
+const insertEveningReport = async(context) => {
+    const body = context.request.body();
     const params = await body.value;
 
-    const id = (await session.get('user')).id;
+    const id = (await context.session.get('user')).id;
     const date = params.get('date');
     const sports_duration = params.get('sports_duration');
     const studying_duration = params.get('studying_duration');
     const eating_regularity = params.get('eating_regularity');
     const eating_quality = params.get('eating_quality');
     const generic_mood = params.get('generic_mood');
-    await reportService.insertEveningReport(date, sports_duration, studying_duration, eating_regularity, 
+    const success = await reportService.insertEveningReport(date, sports_duration, studying_duration, eating_regularity, 
         eating_quality, generic_mood, id);
-    response.redirect('/');
+    if(success.passed)
+    {
+        context.response.redirect('/');
+    }
+    else
+    {
+        reportController.reportEveningFailed(context, success);
+    }
 };
 
    

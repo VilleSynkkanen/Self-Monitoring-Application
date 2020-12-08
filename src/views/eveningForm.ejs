@@ -1,31 +1,32 @@
 <%- include('./partials/header.ejs') %>
 <%- include('./partials/loggedIn.ejs') %>
+<td><a href="/">Front page</a></td>
 <h1>Evening reporting</h1>
 <form method="POST" action='/behavior/reporting/evening'>
 <table>
     <tr>
       <td>Date</td>
-      <td><input type="date" name="date" value=<%= date %>></td>
+      <td><input type="date" name="date" <% if(!passed) { %> value=<%= formData.date %><%}else {%>value=<%= date %> <%} %>></td>
     </tr>
     <tr>
       <td>Sports duration (0-24)</td>
-      <td><input type="number" name="sports_duration" min="0" max="24" step="0.1" /></td>
+      <td><input type="number" name="sports_duration" min="0" max="24" step="0.1" <% if(!passed) { %> value=<%= formData.sports_duration %> <% } %>/></td>
     </tr>
     <tr>
       <td>Studying duration (0-24)</td>
-      <td><input type="number" name="studying_duration" min="0" max="24" step="0.1" /></td>
+      <td><input type="number" name="studying_duration" min="0" max="24" step="0.1" <% if(!passed) { %> value=<%= formData.studying_duration %> <% } %>/></td>
     </tr>
     <tr>
       <td>Eating regularity (1-5)</td>
-      <td><input type="number" name="eating_regularity" min="1" max="5" /></td>
+      <td><input type="number" name="eating_regularity" min="1" max="5" <% if(!passed && formData.eating_regularity !== 0) { %> value=<%= formData.eating_regularity %> <% } %>/></td>
     </tr>
     <tr>
       <td>Eating quality (1-5)</td>
-      <td><input type="number" name="eating_quality" min="1" max="5" /></td>
+      <td><input type="number" name="eating_quality" min="1" max="5" <% if(!passed && formData.eating_quality !== 0) { %> value=<%= formData.eating_quality %> <% } %>/></td>
     </tr>
     <tr>
       <td>Generic mood (1-5)</td>
-      <td><input type="number" name="generic_mood" min="1" max="5" /></td>
+      <td><input type="number" name="generic_mood" min="1" max="5" <% if(!passed && formData.generic_mood !== 0) { %> value=<%= formData.generic_mood %> <% } %>/></td>
     </tr>
     <tr>
       <td>Submit report</td>
@@ -33,4 +34,5 @@
     </tr>
 </table>
 </form>
+<%- include('./partials/errors.ejs') %>
 <%- include('./partials/footer.ejs') %>

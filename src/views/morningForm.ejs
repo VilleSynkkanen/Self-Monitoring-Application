@@ -1,5 +1,6 @@
 <%- include('./partials/header.ejs') %>
 <%- include('./partials/loggedIn.ejs') %>
+<td><a href="/">Front page</a></td>
 <h1>Morning reporting</h1>
 <form method="POST" action='/behavior/reporting/morning'>
 <table>
@@ -9,7 +10,7 @@
     </tr>
     <tr>
       <td>Sleep duration (0-24)</td>
-    <td><input type="number" name="sleep_duration" min="0" max="24" step="0.1" <% if(!passed && formData.sleep_duration !== 0) { %> value=<%= formData.sleep_duration %> <% } %>/></td>
+    <td><input type="number" name="sleep_duration" min="0" max="24" step="0.1" <% if(!passed) { %> value=<%= formData.sleep_duration %> <% } %>/></td>
     </tr>
     <tr>
       <td>Sleep quality (1-5)</td>
