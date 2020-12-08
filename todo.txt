@@ -1,4 +1,4 @@
-FINAL (ke-pe):
+FINAL (ti-pe):
 -landing page: high-level summaries (from api)
 -automated testing (20 tests)
 -manual testing
