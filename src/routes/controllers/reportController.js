@@ -1,4 +1,5 @@
 import { getMoodTrend, getDoneInfo } from "../../services/reportService.js";
+import { getGeneralSummary } from "../../services/summaryService.js";
 
 const today = () => {
   let date = new Date();
@@ -16,6 +17,8 @@ const rootLandingPage = async({render, session}) => {
     data = { report: [], loggedIn: false, email: "" };
   }
   
+  const summary = await getGeneralSummary();
+  data.summary = summary;
   render('rootLanding.ejs', data);
 };
 

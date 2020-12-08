@@ -5,9 +5,9 @@
     to report behavior daily and look at summaries of their previous reports. </p>
 
 <% if(loggedIn)  { %> 
-<td><a href="/behavior/reporting/">Reporting page</a> </td>
+<p><td><a href="/behavior/reporting/">Reporting page</a> </td>
 <td><a href="/behavior/summary/">Summary page</a> </td>
-<td><a href="/auth/logout">Log out</a> </td>
+<td><a href="/auth/logout">Log out</a> </td></p>
 <p>Average mood today: <%= report.today %></p>
 <p>Average mood yesterday: <%= report.yesterday %></p>
 
@@ -17,8 +17,33 @@
 <% if(report.today < report.yesterday) { %> 
     <p>Things are looking gloomy today. :(</p>
 <% } } else {%>
-    <p>Not logged in. :(</p>
-    <td><a href="/auth/registration">Registration page</a> </td>
-    <td><a href="/auth/login">Login page</a> </td>
+    <p>Not logged in.</p>
+    <p><td><a href="/auth/registration">Registration page</a> </td>
+    <td><a href="/auth/login">Login page</a> </td></p>
 <% } %>
+
+<h3>Summary of all users (averages from last week)</h1>
+<ul>
+    <li>
+        Sleep duration: <%= summary.sleep_duration %>
+    </li>
+    <li>
+        Sleep quality: <%= summary.sleep_quality %>
+    </li>
+    <li>
+        Sports duration: <%= summary.sports_duration %>
+    </li>
+    <li>
+        Studying duration: <%= summary.studying_duration %>
+    </li>
+    <li>
+        Eating regularity: <%= summary.eating_regularity %>
+    </li>
+    <li>
+        Eating quality: <%= summary.eating_quality %>
+    </li>
+    <li>
+        Generic mood: <%= summary.generic_mood %>
+    </li>
+</ul> 
 <%- include('./partials/footer.ejs') %>

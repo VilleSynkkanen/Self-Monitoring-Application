@@ -1,83 +1,43 @@
-# WebdevProject
+# Webdev Project Documentation
  
-## Overview
+## Database setup
 
-In the course project, you will build a web application for self-monitoring purposes. The application provides users an opportunity to report behavior daily.
+### Tables
 
-## Reported content
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,          
+  username VARCHAR(320) NOT NULL,   // Username = email
+  password CHAR(60) NOT NULL
+);
 
-The behavior reported to the application are as follows:
+CREATE TABLE reports (
+  id SERIAL PRIMARY KEY,
+  date DATE NOT NULL,
+  type TEXT CHECK (type IN ('morning', 'evening')),
+  generic_mood INTEGER NOT NULL,
+  sleep_duration FLOAT,
+  sleep_quality INTEGER,
+  sports_duration FLOAT,
+  studying_duration FLOAT,
+  eating_regularity INTEGER,
+  eating_quality INTEGER,
+  user_id INTEGER REFERENCES users(id)
+);
 
-- Sleep duration and sleep quality
-- Time spent on sports and exercise
-- Time spent studying
-- Regularity and quality of eating
-- Generic mood
+### Other
 
-When the application is opened (and the user has logged in), the application provides two options for reporting: morning and evening.
+Add database credentials to "/src/config/config.js". No other configurations are necessary.
 
-When choosing morning, the application asks for the sleep duration and sleep quality, as well as generic mood. Sleep duration is given as a decimal indicating hours slept, and sleep quality and generic mood are given using a scale from 1 to 5, where 1 indicates very poor and 5 indicates excellent.
+## Running the application
 
-When choosing evening, the application asks for time spent on sports and exercise, time spent studying, regularity and quality of eating, and generic mood. Time spent on sports and exercise, and time spent studying are given as a decimal number indicating the number of hours. Regularity and quality of eating as well as the generic mood are given using a scale from 1 to 5, where 1 indicates very poor and 5 indicates excellent.
+The application is not deployed online. It can be run locally with the command "deno run --allow-env --allow-net --allow-read --unstable app.js".
 
-In both options, by default, the application assumes that the reporting is done for the current day (or, in the case of the morning, for the previous night). Both reporting options should also provide an input field through which a different day can be chosen -- this way, if a user skips reporting, the data can be filled in at a later point.
-
-## Summarization
-
-The application provides functionality for summarization of responses. Each user can view statistics of their reports on a weekly and monthly level. These statistics are as follows.
-
-- Average sleep duration
-- Average time spent on sports and exercise
-- Average time spent studying
-- Average sleep quality
-- Average generic mood
-
-High-level summaries generated from all the users of the application are shown both on the landing page of the application and provided through an API.
-
-## Schedule
-
-The deadline for the project is on 11th of December. After the project has been submitted, it will be reviewed by other course participants. Reviews will begin on the 12th of December and must be completed by 18th of December.
-
-## Returning the project
-
-Returning the project is done by returning a zip file that contains the project source code. The zip file should contain also instructions for running the project, necessary CREATE TABLE statements, required configurations, an internet address where the application can be tried out, and any other documentation laid out in the more detailed checklist below.
-
-When returning the project, you will use a version of the checklist to specify which requirements were completed.
-
-## Reviewing the projects
-
-Details announced later.
-
-## Steps to get started
-
-Here is a possible list of steps that can be taken to get started with the application. Consider writing tests throughout the project and consider using a version control system (e.g. a private repository on GitHub for the project). For specific requirements, refer to the (epic) checklist below.
-
-- Create a folder structure for the project (following the one outlined in "Structuring Web Applications"). Add files 'app.js' and 'deps.js' to the project.
-- Create a database for the project and add necessary files (configuration, database query functionality) to the project. Based on your interpretation of the requirements, create a database schema. Do not fixate on this schema, and assume that you might change it later on. Also, consider the possibility of feeding in data to the database from the command line / from an online browser for testing purposes.
-- Add some middlewares to the project, at least an error reporting middleware.
-- Add functionality for reporting (morning) behavior. When adding reports, use a fixed user id (e.g. 1).
-- Add functionality for summarization of individual responses on a weekly level, now focusing on a single (last?) week. When building reports, use a fixed user id (e.g. 1).
-- Create the landing page that shows the average mood from today and yesterday. Add a note on trend (i.e. going up / down).
-- Add functionality for reporting (evening) behavior. When adding reports, use a fixed user id (e.g. 1).
-- Adjust summarization of individual responses to include the reported evening behavior. Continue using a fixed user id (e.g. 1).
-- Add monthly summarization functionality and implement the possibility to select a week and / or a month.
-- Implement registration and authentication functionality. Change the fixed user id to that of the user in the session.
-- Take a style library into use.
-- Clean up and document.
-- Implement APIs
-- Continue working on missing content.
-
-## Epic checklist
-
-A more detailed checklist is shown below. We suggest storing intermediate versions of the project in a private GitHub repository or similar. When checking for completed requirements in grading, each of the following bullet counts as one requirement. Deviation from individual requirements is possible, given that they are documented.
+## Completed requirements
 
 - Application structure
     - Application divided into logical folders (akin to the part on Structuring Web Applications)
     - Dependencies exported from deps.js
     - Project launched from app.js, which is in the root folder
-    - Configurations in a separate folder (e.g. config)
-        - Test configurations separate from production configurations
-        - Configurations loaded from environmental variables or e.g. dotenv -files
 
 - Users
     - Email and password stored in the database for each user
@@ -196,8 +156,8 @@ A more detailed checklist is shown below. We suggest storing intermediate versio
 - Testing
     - The application has at least 5 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
     - The application has at least 10 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
+    - The application has at least 15 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
     - The application has at least 20 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
-    - The application has at least 30 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
 
 - Security
     - Passwords are not stored in plaintext
@@ -209,9 +169,7 @@ A more detailed checklist is shown below. We suggest storing intermediate versio
 
 - Database
     - Expensive calculations such as calculating averages are done in the database
-    - Indices are used when joining tables if the queries are such that they are used often
     - Database uses a connection pool
-    - Database credentials are not included in the code
 
 - User interface / views
     - Views are stored in a separate folder
@@ -235,11 +193,9 @@ A more detailed checklist is shown below. We suggest storing intermediate versio
     - Endpoint /api/summary/:year/:month/:day provides a JSON document with averages for sleep duration, time spent on sports and exercise, time spent studying, sleep quality, and generic mood for the given day
 
 - Deployment
-    - Application is available and working in an online location (e.g. Heroku) at an address provided in the documentation
     - Application can be run locally following the guidelines in documentation
 
 - Documentation
     - Documentation contains necessary CREATE TABLE statements needed to create the database used by the application
-    - Documentation contains the address at which the application can currently be accessed
     - Documentation contains guidelines for running the application
     - Documentation contains guidelines for running tests
