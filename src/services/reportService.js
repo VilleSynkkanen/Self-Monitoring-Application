@@ -8,6 +8,13 @@ const morningReportValidationRules = {
   generic_mood : [required, isInt, numberBetween(1, 5)]
 };
 
+const eveningReportValidationRules = {
+  date: [required],
+  sleep_duration: [required, minNumber(0)],
+  sleep_quality : [isInt, numberBetween(1, 5)],
+  generic_mood : [required, isInt, numberBetween(1, 5)]
+};
+
 const getDoneInfo = async(session) => {
   const id = (await session.get('user')).id;
   const result = await executeQuery('SELECT type FROM reports WHERE user_id = $1 AND date = CURRENT_DATE;', id);
@@ -58,18 +65,44 @@ const getMoodTrend = async(session) => {
 }
 
 const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_mood, user_id) => {
-  const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'morning';", user_id, date);
-  if(existingReport && existingReport.rowCount > 0)
+  // Number turns "" into 0, so we have to check for that first
+  if(sleep_duration !== "")
   {
-    // Found existing report
-    const existing = existingReport.rowsOfObjects()[0];
-    await executeQuery("UPDATE reports SET sleep_duration = $2, sleep_quality = $3, generic_mood = $4 WHERE user_id = $5 AND date = $1 AND type = 'morning';", 
-      date, sleep_duration, sleep_quality, generic_mood, user_id);
+    sleep_duration = Number(sleep_duration);
   }
-  else
+  const data = {
+    date: date,
+    sleep_duration: sleep_duration,
+    sleep_quality: Number(sleep_quality),
+    generic_mood: Number(generic_mood)
+  };
+
+  console.log(data);
+
+  const [passes, errors] = await validate(data, morningReportValidationRules);
+
+  if (passes) 
   {
-    await executeQuery("INSERT INTO reports (date, sleep_duration, sleep_quality, generic_mood, user_id, type) VALUES ($1, $2, $3, $4, $5, 'morning');", 
-      date, sleep_duration, sleep_quality, generic_mood, user_id);
+    const existingReport = await executeQuery("SELECT * FROM reports WHERE user_id = $1 AND date = $2 AND type = 'morning';", user_id, date);
+    if(existingReport && existingReport.rowCount > 0)
+    {
+      // Found existing report
+      const existing = existingReport.rowsOfObjects()[0];
+      await executeQuery("UPDATE reports SET sleep_duration = $2, sleep_quality = $3, generic_mood = $4 WHERE user_id = $5 AND date = $1 AND type = 'morning';", 
+        date, sleep_duration, sleep_quality, generic_mood, user_id);
+    }
+    else
+    {
+      await executeQuery("INSERT INTO reports (date, sleep_duration, sleep_quality, generic_mood, user_id, type) VALUES ($1, $2, $3, $4, $5, 'morning');", 
+        date, sleep_duration, sleep_quality, generic_mood, user_id);
+    }
+
+    return { passed: true, formData: {}, errors: errors };
+  } 
+  else 
+  {
+    console.log(errors);
+    return { passed: false, formData: data, errors: errors };
   }
 }
 

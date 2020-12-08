@@ -1,6 +1,6 @@
 FEATURES (ti):
 -reporting:
-	-validation, error messages
+	-validation, error messages in evening report
 -landing page:
 	-high-level summaries (from api)
 -usability improvements
@@ -26,7 +26,7 @@ Can leave out max 6 requirements for grade 5:
 
 Notes for docs:
 -generic mood is required (cannot be "no mood")
-
+-times are between 0 and 24 hours
 
 
 
