@@ -4,9 +4,11 @@
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,          
-  username VARCHAR(320) NOT NULL,   // Username = email
+  username VARCHAR(320) NOT NULL, 
   password CHAR(60) NOT NULL
 );
+
+// Note: username = email
 
 CREATE TABLE reports (
   id SERIAL PRIMARY KEY,
@@ -30,7 +32,7 @@ Add database credentials to "/src/config/config.js" or pass them to the applicat
 
 ## Running the application & tests
 
-The application is not deployed online. The application and the tests can be run locally with the following commands (on Linux command line or Git Bash on Windows). Add your own database credentials to the commands if you didn't add them to the config file:
+The application is not deployed online. The application and the tests can be run locally with the following commands from the "/src" folder (on Linux command line or Git Bash on Windows). Add your own database credentials to the commands if you didn't add them to the config file:
 
 Application:
 PGPORT="port" PGDATABASE="database" PGHOST="host" PGUSER="user" PGPASSWORD="password" deno run --allow-env --allow-net --allow-read --unstable app.js
