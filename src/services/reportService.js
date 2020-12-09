@@ -4,7 +4,7 @@ import { validate, required, minNumber, isInt, numberBetween } from "../deps.js"
 const morningReportValidationRules = {
   date: [required],
   sleep_duration: [required, minNumber(0)],
-  sleep_quality : [isInt, numberBetween(1, 5)],
+  sleep_quality : [required, isInt, numberBetween(1, 5)],
   generic_mood : [required, isInt, numberBetween(1, 5)]
 };
 
@@ -12,8 +12,8 @@ const eveningReportValidationRules = {
   date: [required],
   sports_duration: [required, minNumber(0)],
   studying_duration: [required, minNumber(0)],
-  eating_regularity: [isInt, numberBetween(1, 5)],
-  eating_quality: [isInt, numberBetween(1, 5)],
+  eating_regularity: [required, isInt, numberBetween(1, 5)],
+  eating_quality: [required, isInt, numberBetween(1, 5)],
   generic_mood: [required, isInt, numberBetween(1, 5)]
 };
 
@@ -72,11 +72,19 @@ const insertMorningReport = async(date, sleep_duration, sleep_quality, generic_m
   {
     sleep_duration = Number(sleep_duration);
   }
+  if(sleep_quality !== "")
+  {
+    sleep_quality = Number(sleep_quality);
+  }
+  if(generic_mood !== "")
+  {
+    generic_mood = Number(generic_mood);
+  }
   const data = {
     date: date,
     sleep_duration: sleep_duration,
-    sleep_quality: Number(sleep_quality),
-    generic_mood: Number(generic_mood)
+    sleep_quality: sleep_quality,
+    generic_mood: generic_mood
   };
 
   const [passes, errors] = await validate(data, morningReportValidationRules);
@@ -115,13 +123,25 @@ const insertEveningReport = async(date, sports_duration, studying_duration, eati
   {
     studying_duration = Number(studying_duration);
   }
+  if(eating_regularity !== "")
+  {
+    eating_regularity = Number(eating_regularity);
+  }
+  if(eating_quality !== "")
+  {
+    eating_quality = Number(eating_quality);
+  }
+  if(generic_mood !== "")
+  {
+    generic_mood = Number(generic_mood);
+  }
   const data = {
     date: date,
     sports_duration: sports_duration,
     studying_duration: studying_duration,
-    eating_regularity: Number(eating_regularity),
-    eating_quality: Number(eating_quality),
-    generic_mood: Number(generic_mood)
+    eating_regularity: eating_regularity,
+    eating_quality: eating_quality,
+    generic_mood: generic_mood
   };
 
   const [passes, errors] = await validate(data, eveningReportValidationRules);
