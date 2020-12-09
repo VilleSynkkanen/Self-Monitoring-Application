@@ -1,8 +1,9 @@
 FINAL (ke-to):
--automated testing (20 tests)
+-automated testing (5 tests)
+-configs 
+-table indices
 -finish documentation
 -final checks
--remove database credentials
 -return zip file (src + doc)
 
 -Apis: routes that are used for building APIs
@@ -15,14 +16,12 @@ User2:
 
 Can leave out max 6 requirements for grade 5:
 -deployment (1 + 1 from docs)
--configs (1)
--database creds in code (1)
--table indices (1)
+-tests(3)
+
 
 Notes for docs:
 -generic mood is required (cannot be "no mood")
 -times are between 0 and 24 hours
-
 
 Returning the project is done by returning a zip file that contains the project source code. 
 The zip file should contain also instructions for running the project, necessary CREATE TABLE statements, 
@@ -33,6 +32,15 @@ Documentation contains necessary CREATE TABLE statements needed to create the da
 Documentation contains the address at which the application can currently be accessed
 Documentation contains guidelines for running the application
 Documentation contains guidelines for running tests
+
+hostname: "hattie.db.elephantsql.com",
+database: "eifojnbl",
+user: "eifojnbl",
+password: "sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF",
+port: 5432
+
+Running (on linux command line, git bash works)
+PGPORT=5432 PGDATABASE=eifojnbl PGHOST=hattie.db.elephantsql.com PGUSER=eifojnbl PGPASSWORD=sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF deno run --allow-env --allow-net --allow-read --unstable app.js
 
 
 
