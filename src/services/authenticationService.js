@@ -36,7 +36,7 @@ const register = async({request}) => {
             return {passed: false, errors: { email: { isInUse: "email is already in use" } }, email: ""};
         }
         // otherwise, store the details in the database
-        const hash = await bcrypt.hash(data.password1);
+        const hash = await bcrypt.hash(data.password);
         // when storing a password, store the hash
         await executeQuery("INSERT INTO users (username, password) VALUES ($1, $2);", data.email, hash);
 

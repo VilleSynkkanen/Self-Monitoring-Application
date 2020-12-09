@@ -25,25 +25,25 @@
 <h3>Summary of all users (averages from last week)</h1>
 <ul>
     <li>
-        Sleep duration: <%= summary.sleep_duration %>
+        Sleep duration: <%= Number(summary.sleep_duration) %>
     </li>
     <li>
-        Sleep quality: <%= summary.sleep_quality %>
+        Sleep quality: <%= Number(summary.sleep_quality) %>
     </li>
     <li>
-        Sports duration: <%= summary.sports_duration %>
+        Sports duration: <%= Number(summary.sports_duration) %>
     </li>
     <li>
-        Studying duration: <%= summary.studying_duration %>
+        Studying duration: <%= Number(summary.studying_duration) %>
     </li>
     <li>
-        Eating regularity: <%= summary.eating_regularity %>
+        Eating regularity: <%= Number(summary.eating_regularity) %>
     </li>
     <li>
-        Eating quality: <%= summary.eating_quality %>
+        Eating quality: <%= Number(summary.eating_quality) %>
     </li>
     <li>
-        Generic mood: <%= summary.generic_mood %>
+        Generic mood: <%= Number(summary.generic_mood) %>
     </li>
 </ul> 
 <%- include('./partials/footer.ejs') %>
