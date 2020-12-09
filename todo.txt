@@ -43,7 +43,7 @@ password: "sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF",
 port: 5432
 
 Running (on linux command line, git bash works)
-PGPORT=5432 PGDATABASE=eifojnbl PGHOST=hattie.db.elephantsql.com PGUSER=eifojnbl PGPASSWORD=sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF deno run --allow-env --allow-net --allow-read --unstable app.js
+PGPORT=5432 PGDATABASE=ktqlymtw PGHOST=hattie.db.elephantsql.com PGUSER=ktqlymtw PGPASSWORD=221_perkQ4aW1DLnutvp1eCyuAU43l5z deno run --allow-env --allow-net --allow-read --unstable app.js
 
 Running tests:
-PGPORT=5432 PGDATABASE=eifojnbl PGHOST=hattie.db.elephantsql.com PGUSER=eifojnbl PGPASSWORD=sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF deno test --allow-env --allow-net --allow-read --unstable app_test.js
+PGPORT=5432 PGDATABASE=ktqlymtw PGHOST=hattie.db.elephantsql.com PGUSER=ktqlymtw PGPASSWORD=221_perkQ4aW1DLnutvp1eCyuAU43l5z deno test --allow-env --allow-net --allow-read --unstable app_test.js
