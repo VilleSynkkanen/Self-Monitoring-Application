@@ -6,3 +6,5 @@ export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 export { Session } from "https://deno.land/x/session@v1.0.0/mod.ts";
 export { oakCors } from "https://deno.land/x/cors/mod.ts";
 export { validate, required, isEmail, minLength, match, minNumber, isInt, numberBetween  } from "https://deno.land/x/validasaur/mod.ts";
+export { superoak } from "https://deno.land/x/superoak@2.3.1/mod.ts";
+export { assertEquals, assertNotEquals, assertThrows } from "https://deno.land/std@0.78.0/testing/asserts.ts";

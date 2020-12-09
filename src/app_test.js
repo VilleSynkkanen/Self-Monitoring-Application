@@ -6,9 +6,9 @@
 *  5. Failed registration
 */ 
 
-import { superoak } from "https://deno.land/x/superoak@2.3.1/mod.ts";
+import { superoak } from "./deps.js";
 import { app } from "./app.js";
-import { assertEquals, assertNotEquals, assertThrows } from "https://deno.land/std@0.78.0/testing/asserts.ts";
+import { assertEquals, assertNotEquals, assertThrows } from "./deps.js";
 import * as middlewares from "./middleware/middlewares.js";
 import { executeQuery } from "./database/database.js";
 
@@ -96,31 +96,3 @@ Deno.test({
     sanitizeResources: false,
     sanitizeOps: false
 });
-
-
-
-
-
-
-
-
-
-
-
-/*
-let testClient = await superoak(app);
-let response = await testClient
-  .post("/auth/login")
-  
-  .expect(200);
-
-let headers = res.headers["set-cookie"];
-let cookie = headers.split(";")[0];
-
-testClient = await superoak(app);
-await testClient
-  .get(`/secret-site`)
-  .set("Cookie", cookie)
-  .expect(200);
-
-*/

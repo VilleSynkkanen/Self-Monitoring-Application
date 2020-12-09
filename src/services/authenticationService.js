@@ -1,4 +1,4 @@
-import { bcrypt, validate, required, isEmail, minLength, match } from "../deps.js"; 
+import { bcrypt, validate, required, isEmail, minLength } from "../deps.js"; 
 import { executeQuery } from "../database/database.js";
 
 const registrationValidationRules = {
@@ -15,7 +15,6 @@ const register = async({request}) => {
         password: params.get('password1'),
         password2: params.get('password2')
     };
-
     if(data.password !== data.password2)
     {
         return {passed: false, errors: { password: { match: "passwords do not match" } }, email: data.email};
@@ -25,7 +24,6 @@ const register = async({request}) => {
     
     if (!passes) 
     {
-        console.log(errors);
         return {passed: false, errors: errors, email: data.email};
     } 
     else {
@@ -60,7 +58,6 @@ const login = async({request, session}) => {
 
     const user = res.rowsOfObjects()[0];
     const hash = user.password;
-
     const correct = await bcrypt.compare(password, hash);
     if (!correct) {
         return false;
