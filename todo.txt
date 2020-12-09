@@ -1,9 +1,7 @@
 FINAL (ke-to):
--automated testing (5 tests)
--configs 
--table indices
--finish documentation
 -final checks
+	-check documentation
+	-check functionality
 -return zip file (src + doc)
 
 -Apis: routes that are used for building APIs
@@ -17,6 +15,10 @@ User2:
 Can leave out max 6 requirements for grade 5:
 -deployment (1 + 1 from docs)
 -tests(3)
+
+Indices:
+-reports by user id
+
 
 
 Notes for docs:
@@ -33,6 +35,7 @@ Documentation contains the address at which the application can currently be acc
 Documentation contains guidelines for running the application
 Documentation contains guidelines for running tests
 
+
 hostname: "hattie.db.elephantsql.com",
 database: "eifojnbl",
 user: "eifojnbl",
@@ -42,5 +45,5 @@ port: 5432
 Running (on linux command line, git bash works)
 PGPORT=5432 PGDATABASE=eifojnbl PGHOST=hattie.db.elephantsql.com PGUSER=eifojnbl PGPASSWORD=sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF deno run --allow-env --allow-net --allow-read --unstable app.js
 
-
-
+Running tests:
+PGPORT=5432 PGDATABASE=eifojnbl PGHOST=hattie.db.elephantsql.com PGUSER=eifojnbl PGPASSWORD=sbo_HmjHuaB_FtzYK8UXkN0x7LhJk9MF deno test --allow-env --allow-net --allow-read --unstable app_test.js

@@ -2,8 +2,6 @@
  
 ## Database setup
 
-### Tables
-
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,          
   username VARCHAR(320) NOT NULL,   // Username = email
@@ -24,13 +22,21 @@ CREATE TABLE reports (
   user_id INTEGER REFERENCES users(id)
 );
 
-### Other
+CREATE INDEX reports_by_user_id on reports (user_id);
 
-Add database credentials to "/src/config/config.js". No other configurations are necessary.
+## Config
 
-## Running the application
+Add database credentials to "/src/config/config.js" or pass them to the application via environmental variables. No other configurations are necessary.
 
-The application is not deployed online. It can be run locally with the command "deno run --allow-env --allow-net --allow-read --unstable app.js".
+## Running the application & tests
+
+The application is not deployed online. The application and the tests can be run locally with the following commands (on Linux command line or Git Bash on Windows). Add your own database credentials to the commands if you didn't add them to the config file:
+
+Application:
+PGPORT="port" PGDATABASE="database" PGHOST="host" PGUSER="user" PGPASSWORD="password" deno run --allow-env --allow-net --allow-read --unstable app.js
+
+Tests:
+PGPORT="port" PGDATABASE="database" PGHOST="host" PGUSER="user" PGPASSWORD="password" deno test --allow-env --allow-net --allow-read --unstable app_test.js
 
 ## Completed requirements
 
@@ -38,6 +44,9 @@ The application is not deployed online. It can be run locally with the command "
     - Application divided into logical folders (akin to the part on Structuring Web Applications)
     - Dependencies exported from deps.js
     - Project launched from app.js, which is in the root folder
+    - Configurations in a separate folder (e.g. config)
+        - Test configurations separate from production configurations
+        - Configurations loaded from environmental variables or e.g. dotenv -files
 
 - Users
     - Email and password stored in the database for each user
@@ -155,9 +164,6 @@ The application is not deployed online. It can be run locally with the command "
 
 - Testing
     - The application has at least 5 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
-    - The application has at least 10 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
-    - The application has at least 15 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
-    - The application has at least 20 meaningful automated tests. All tests detect if e.g. tested functionality is changed so that it no longer works as expected.
 
 - Security
     - Passwords are not stored in plaintext
@@ -169,7 +175,9 @@ The application is not deployed online. It can be run locally with the command "
 
 - Database
     - Expensive calculations such as calculating averages are done in the database
+    - Indices are used when joining tables if the queries are such that they are used often
     - Database uses a connection pool
+    - Database credentials are not included in the code
 
 - User interface / views
     - Views are stored in a separate folder
